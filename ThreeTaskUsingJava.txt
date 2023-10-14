@@ -1,0 +1,110 @@
+1. // Import the Collections and Arrays classes
+   import java.util.Collections;
+   import java.util.Arrays;
+
+// Create an array with the values 1 to 7
+   int[] array = {1, 2, 3, 4, 5, 6, 7};
+
+// Convert the array to a list
+   List<Integer> list = Arrays.asList(array);
+
+// Shuffle the list using the Collections.shuffle() method
+  Collections.shuffle(list);
+
+// Print the shuffled list
+   System.out.println(list);
+
+2.// Import the Scanner class
+import java.util.Scanner;
+
+// Define a method that converts a Roman number to an integer
+public static int romanToInt(String roman) {
+    // Initialize an integer variable to store the result
+    int result = 0;
+    // Loop through each character in the Roman number from left to right
+    for (int i = 0; i < roman.length(); i++) {
+        // Get the value of the current character using a switch-case statement
+        int value = switch (roman.charAt(i)) {
+            case 'I' -> 1;
+            case 'V' -> 5;
+            case 'X' -> 10;
+            case 'L' -> 50;
+            case 'C' -> 100;
+            case 'D' -> 500;
+            case 'M' -> 1000;
+            default -> 0;
+        };
+        // If the current character is the last one or its value is greater than or equal to the next one
+        if (i == roman.length() - 1 || value >= romanToInt(roman.charAt(i + 1))) {
+            // Add its value to the result
+            result += value;
+        }
+        // Otherwise
+        else {
+            // Subtract its value from the result
+            result -= value;
+        }
+    }
+    // Return the result
+    return result;
+}
+
+// Define a method that gets a Roman number as input from the user
+public static String getInput() {
+    // Create a Scanner object
+    Scanner scan = new Scanner(System.in);
+    // Ask the user to enter a Roman number
+    System.out.print("Enter a Roman number: ");
+    // Return the input string
+    return scan.next();
+}
+
+// Define the main method
+public static void main(String[] args) {
+    // Get a Roman number as input from the user
+    String roman = getInput();
+    // Convert it to an integer using the romanToInt() method
+    int integer = romanToInt(roman);
+    // Print the result
+    System.out.println(roman + " = " + integer);
+}
+
+
+3.// Import the Arrays class
+import java.util.Arrays;
+
+// Define a method that checks if a sentence is pangram or not
+public static boolean isPangram(String sentence) {
+    // Convert the sentence to lowercase and remove all spaces and punctuation marks
+    sentence = sentence.toLowerCase().replaceAll("[\\s\\p{Punct}]", "");
+    // Create a boolean array of size 26 to mark the presence of each letter from A to Z
+    boolean[] present = new boolean[26];
+    // Loop through each character in the sentence and mark its corresponding index in the array as true
+    for (char c : sentence.toCharArray()) {
+        present[c - 'a'] = true;
+    }
+    // Loop through the boolean array and check if all elements are true
+    for (boolean b : present) {
+        if (!b) {
+            // If any element is false, return false
+            return false;
+        }
+    }
+    // If all elements are true, return true
+    return true;
+}
+
+// Define the main method
+public static void main(String[] args) {
+    // Define a test sentence
+    String sentence = "The quick brown fox jumps over the lazy dog";
+    // Check if it is pangram or not using the isPangram() method
+    boolean pangram = isPangram(sentence);
+    // Print the result
+    if (pangram) {
+        System.out.println("The sentence is pangram.");
+    } else {
+        System.out.println("The sentence is not pangram.");
+    }
+}
+
